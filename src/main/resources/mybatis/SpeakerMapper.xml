@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.app.psk_lab1.dao.mybatis.SpeakerMapper">
+
+    <select id="selectAll" resultType="com.example.app.psk_lab1.entity.Speaker">
+        SELECT id, full_name AS fullName, email, company, opt_lock_version AS optLockVersion
+        FROM speaker
+    </select>
+
+    <select id="selectById" parameterType="long"
+            resultType="com.example.app.psk_lab1.entity.Speaker">
+        SELECT id, full_name AS fullName, email, company, opt_lock_version AS optLockVersion
+        FROM speaker
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insertSpeaker" parameterType="com.example.app.psk_lab1.entity.Speaker">
+        INSERT INTO speaker (full_name, email, company, opt_lock_version)
+        VALUES (#{fullName}, #{email}, #{company}, #{optLockVersion})
+    </insert>
+
+    <update id="updateSpeaker" parameterType="com.example.app.psk_lab1.entity.Speaker">
+        UPDATE speaker
+        SET full_name = #{fullName},
+            email = #{email},
+            company = #{company},
+            opt_lock_version = opt_lock_version + 1
+        WHERE id = #{id}
+          AND opt_lock_version = #{optLockVersion}
+    </update>
+
+    <delete id="deleteSpeaker" parameterType="long">
+        DELETE FROM speaker
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

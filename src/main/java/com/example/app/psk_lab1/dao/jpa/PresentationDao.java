@@ -11,5 +11,5 @@ public interface PresentationDao {
     void create(Presentation presentation);
     Presentation update (Presentation presentation);
     void delete(Long id);
-    Presentation findByConferenceId(Long conferenceId);
+    List<Presentation> findByConferenceId(Long conferenceId);
 }

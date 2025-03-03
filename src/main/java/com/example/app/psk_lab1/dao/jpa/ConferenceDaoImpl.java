@@ -4,6 +4,7 @@ import com.example.app.psk_lab1.entity.Conference;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class ConferenceDaoImpl implements ConferenceDao {
     }
 
     @Override
+    @Transactional
     public void create(Conference conference) {
         em.persist(conference);
     }

@@ -42,8 +42,11 @@ public class PresentationDaoImpl implements PresentationDao {
         }
     }
 
-    @Override
-    public Presentation findByConferenceId(Long conferenceId) {
-        return em.find(Presentation.class, conferenceId);
+    public List<Presentation> findByConferenceId(Long conferenceId) {
+        return em.createQuery(
+                        "SELECT p FROM Presentation p WHERE p.conference.id = :conferenceId",
+                        Presentation.class)
+                .setParameter("conferenceId", conferenceId)
+                .getResultList();
     }
 }
