@@ -44,13 +44,11 @@ public class ConferenceResource {
         if (existing == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+
         existing.setTitle(confUpdate.getTitle());
-
-
-
-        // etc. update other fields
-
-
+        existing.setLocation(confUpdate.getLocation());
+        existing.setStartDate(confUpdate.getStartDate());
+        existing.setEndDate(confUpdate.getEndDate());
 
         conferenceDao.update(existing);
         return Response.ok(existing).build();

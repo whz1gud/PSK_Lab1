@@ -15,12 +15,14 @@ public class ConferenceDaoImpl implements ConferenceDao {
     private EntityManager em;
 
     @Override
+    @Transactional
     public List<Conference> findAll() {
         return em.createQuery("SELECT c FROM Conference c", Conference.class)
                 .getResultList();
     }
 
     @Override
+    @Transactional
     public Conference findById(Long id) {
         return em.find(Conference.class, id);
     }
@@ -32,11 +34,13 @@ public class ConferenceDaoImpl implements ConferenceDao {
     }
 
     @Override
+    @Transactional
     public Conference update(Conference conference) {
         return em.merge(conference);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         Conference c = em.find(Conference.class, id);
         if (c != null) {
